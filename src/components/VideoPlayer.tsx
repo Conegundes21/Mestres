@@ -25,7 +25,7 @@ export default function VideoPlayer({
     >
       {!isPlaying ? (
         <div
-          className="absolute inset-0 cursor-pointer bg-black/30"
+          className="absolute inset-0 cursor-pointer bg-black/60 flex items-center justify-center"
           onClick={handlePlay}
         >
           <img
@@ -33,65 +33,12 @@ export default function VideoPlayer({
             alt="Video Thumbnail"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-center px-4 space-y-4"
-            >
-              <motion.div
-                animate={{
-                  scale: [1, 1.05, 1],
-                  opacity: [0.9, 1, 0.9],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="text-3xl md:text-5xl font-bold"
-              >
-                <span className="text-white drop-shadow-lg">
-                  ASSISTA AGORA!
-                </span>
-              </motion.div>
-              <motion.p
-                animate={{
-                  opacity: [0.7, 1, 0.7],
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="text-xl md:text-2xl text-white font-medium tracking-wide"
-              >
-                Descubra o segredo das grandes mentes
-              </motion.p>
-            </motion.div>
-
-            <motion.div
-              className="relative group cursor-pointer"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <motion.div
-                className="absolute -inset-4 bg-gradient-to-r from-amber-500 to-yellow-500 rounded-full blur-lg"
-                animate={{
-                  opacity: [0.3, 0.6, 0.3],
-                  scale: [1, 1.2, 1],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-              <div className="relative bg-gradient-to-r from-amber-500 to-yellow-500 w-28 h-28 rounded-full flex items-center justify-center shadow-xl overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-shimmer transition-opacity" />
-                <Play className="w-14 h-14 text-black fill-black" />
-              </div>
-            </motion.div>
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <div className="flex flex-col items-center justify-center bg-black/70 rounded-lg px-6 py-6">
+              <Play className="w-16 h-16 text-white mb-4 opacity-90" />
+              <span className="text-white font-bold text-lg md:text-xl mb-1 text-center drop-shadow">Seu vídeo já começou</span>
+              <span className="text-white text-base md:text-lg opacity-90 text-center">Clique para ouvir</span>
+            </div>
           </div>
         </div>
       ) : (

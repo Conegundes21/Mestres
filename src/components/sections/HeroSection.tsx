@@ -181,13 +181,13 @@ export default function HeroSection() {
         </div>
       )}
       <section
-        className="min-h-[80vh] md:min-h-screen bg-black text-white relative overflow-hidden"
+        className="min-h-screen flex flex-col justify-center items-center bg-black text-white relative overflow-hidden"
         id="headline-section"
       >
         {/* Background gradient effect */}
         {/* <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 via-transparent to-transparent" /> */}
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent" />
-        <div className="container mx-auto px-4 pt-0 pb-32 relative z-10 flex flex-col items-center">
+        <div className="container mx-auto px-4 py-8 md:py-16 flex-1 flex flex-col justify-center items-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 0 }}
             animate={{ opacity: 1, y: 0 }}
