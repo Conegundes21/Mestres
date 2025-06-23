@@ -187,12 +187,12 @@ export default function HeroSection() {
         {/* Background gradient effect */}
         {/* <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 via-transparent to-transparent" /> */}
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent" />
-        <div className="container mx-auto px-4 pt-0 pb-32 relative z-10">
+        <div className="container mx-auto px-4 pt-0 pb-32 relative z-10 flex flex-col items-center">
           <motion.div
             initial={{ opacity: 0, y: 0 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto text-center"
+            className="w-full max-w-2xl flex flex-col items-center text-center"
           >
             <motion.span
               initial={{ opacity: 0 }}
@@ -207,7 +207,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-amber-200 to-yellow-500 bg-clip-text text-transparent leading-tight"
+              className="text-3xl md:text-5xl font-extrabold text-center text-white mb-4 leading-tight"
             >
               Existe um código silencioso que os grandes usam para moldar suas vidas...<br />
               <span className="text-red-500 drop-shadow-[0_2px_8px_rgba(239,68,68,0.7)]">E você nunca teve acesso.</span>
@@ -217,67 +217,44 @@ export default function HeroSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
-              className="text-xl md:text-2xl text-zinc-300 mb-8"
+              className="text-lg md:text-2xl text-zinc-200 text-center mb-8 max-w-2xl mx-auto"
             >
               Descubra como aplicar os mesmos princípios usados silenciosamente por atletas, líderes e bilionários, agora adaptado à sua realidade.
             </motion.p>
+
+            {/* Video player em destaque */}
+            <div className="w-full max-w-xl mb-8">
+              {/* <VideoPlayer ... /> */}
+            </div>
 
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.8 }}
-              className="space-y-8"
+              className="w-full flex flex-col items-center"
             >
-              <div className="flex flex-col items-center justify-center space-y-4">
-                <Button
-                  size="lg"
-                  onClick={() =>
-                    document
-                      .querySelector("#vsl-section")
-                      ?.scrollIntoView({ behavior: "smooth" })
-                  }
-                  className="bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-black font-bold text-xl px-12 py-8 rounded-full group"
-                >
-                  ASSISTIR AGORA
-                  <ArrowRight className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1 }}
-                className="flex items-center justify-center gap-4 text-emerald-300"
+              <button
+                onClick={() =>
+                  document
+                    .querySelector("#vsl-section")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+                className="w-full max-w-md py-4 mb-5 bg-gradient-to-r from-amber-400 to-yellow-400 text-black font-bold text-xl rounded-full shadow-lg hover:scale-105 transition group flex items-center justify-center"
               >
-                <div className="flex items-center gap-2">
-                  <svg
-                    className="w-5 h-5 text-emerald-300"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span className="text-emerald-300">Garantia Incondicional</span>
+                Quero acessar o método agora!
+                <ArrowRight className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" />
+              </button>
+
+              <div className="flex gap-3 justify-center mb-2">
+                <div className="flex items-center gap-2 bg-emerald-500/10 px-3 py-2 rounded-full">
+                  <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                  <span className="text-emerald-300 font-semibold text-sm">Garantia Incondicional</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <svg
-                    className="w-5 h-5 text-emerald-300"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span className="text-emerald-300">Acesso vitalício</span>
+                <div className="flex items-center gap-2 bg-emerald-500/10 px-3 py-2 rounded-full">
+                  <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                  <span className="text-emerald-300 font-semibold text-sm">Acesso vitalício</span>
                 </div>
-              </motion.div>
+              </div>
             </motion.div>
           </motion.div>
         </div>
