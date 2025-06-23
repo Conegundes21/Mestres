@@ -96,10 +96,10 @@ export default function EbookShowcase() {
           <span className="text-sm font-medium">+78 Ebooks & Audiobooks</span>
         </div>
         <h3 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent mb-2">
-          Biblioteca Completa de Conhecimento
+          TODOS ESSES BÔNUS SÃO 100% GRATUITOS AO GARANTIR O ACESSO HOJE
         </h3>
         <p className="text-zinc-400">
-          Uma coleção premium de conteúdo para acelerar sua evolução
+          Uma coleção premium com mais de R$ 1.791 em valor incluída no seu acesso
         </p>
       </motion.div>
 

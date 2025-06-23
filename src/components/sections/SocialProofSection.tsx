@@ -19,16 +19,16 @@ interface Testimonial {
 const defaultTestimonials: Testimonial[] = [
   {
     name: "Gabriel Santos",
-    role: "Tech Lead",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=gabriel",
+    role: "Marketing Digital",
+    image: "https://images.pexels.com/photos/14284275/pexels-photo-14284275.jpeg",
     content:
-      "A metodologia é revolucionária. Consegui equilibrar vida pessoal e profissional como nunca antes.",
+      "A metodologia é revolucionária! Consegui equilibrar vida pessoal e profissional como nunca antes.",
     rating: 5,
   },
   {
-    name: "Isabella Costa",
-    role: "Product Manager",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=isabella",
+    name: "Lucas Alves",
+    role: "Empreendedor",
+    image: "https://images.pexels.com/photos/1334945/pexels-photo-1334945.jpeg",
     content:
       "As técnicas de foco e produtividade transformaram completamente minha forma de trabalhar.",
     rating: 5,

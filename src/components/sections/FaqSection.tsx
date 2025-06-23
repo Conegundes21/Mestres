@@ -66,6 +66,31 @@ const defaultFaqs: FaqItem[] = [
     answer:
       "Sim! Nossa plataforma é 100% responsiva e otimizada para todos os dispositivos. Você pode acessar o conteúdo pelo computador, tablet ou celular, quando e onde quiser.",
   },
+  {
+    question: "E se eu não tiver tempo para acompanhar agora?",
+    answer:
+      "Não se preocupe! O acesso é vitalício, então você pode começar quando quiser e avançar no seu próprio ritmo. O importante é dar o primeiro passo e garantir seu acesso à metodologia.",
+  },
+  {
+    question: "O método funciona mesmo para quem já tentou outros cursos e não conseguiu resultado?",
+    answer:
+      "Sim! Nosso método é prático, direto ao ponto e baseado em neurociência. Muitos alunos já tinham tentado de tudo antes e só conseguiram resultados reais aqui, graças ao nosso acompanhamento e à estrutura diferenciada.",
+  },
+  {
+    question: "Posso parcelar o valor do investimento?",
+    answer:
+      "Sim! Você pode parcelar em até 12x no cartão de crédito, tornando o investimento muito acessível. Também oferecemos desconto especial para pagamento via PIX.",
+  },
+  {
+    question: "E se eu tiver dificuldades técnicas para acessar a plataforma?",
+    answer:
+      "Nossa equipe de suporte está pronta para te ajudar em qualquer dificuldade técnica. Basta entrar em contato e resolvemos rapidamente para que você foque apenas no seu desenvolvimento.",
+  },
+  {
+    question: "O programa serve para qualquer idade?",
+    answer:
+      "Sim! O método foi desenvolvido para ser aplicado por pessoas de todas as idades, desde jovens em início de carreira até adultos que buscam uma transformação pessoal ou profissional.",
+  },
 ];
 
 export default function FaqSection({ faqs = defaultFaqs }: FaqSectionProps) {

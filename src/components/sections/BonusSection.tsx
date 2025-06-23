@@ -25,8 +25,8 @@ const bonusItems: BonusItem[] = [
   },
   {
     icon: <Sparkles className="w-8 h-8 text-emerald-400" />,
-    title: "Áudios Binaurais",
-    description: "Coleção exclusiva para reprogramação mental diária",
+    title: "Cronograma 30 Dias",
+    description: "Plano prático para turbinar sua produtividade e criar novos hábitos em apenas 30 dias.",
     value: "R$ 97",
   },
 ];
@@ -125,6 +125,9 @@ export default function BonusSection() {
                     <div className="text-2xl font-bold text-emerald-400">
                       {item.value}
                     </div>
+                    <div className="text-xs font-bold italic text-emerald-300 mt-1">
+                      (Incluso Gratuitamente)
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -138,10 +141,13 @@ export default function BonusSection() {
             transition={{ delay: 0.6 }}
             className="mt-12 text-center space-y-6"
           >
-            <div className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent mb-6">
-              Valor Total dos Bônus: R$ 1.791
+            <div className="flex flex-col items-center justify-center mb-4">
+              <div className="flex items-center gap-2 mb-1">
+                <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                <span className="font-bold text-white text-base md:text-lg">Incluídos Gratuitamente na Sua Compra</span>
+              </div>
+              <span className="text-zinc-300 text-sm md:text-base">Você leva tudo isso SEM pagar nada a mais.</span>
             </div>
-
             <motion.div
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -149,7 +155,7 @@ export default function BonusSection() {
             >
               <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-500 rounded-xl blur-md opacity-30 group-hover:opacity-70 transition-all duration-500" />
               <Button
-                className="relative w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-bold text-lg py-6 px-8 rounded-lg shadow-xl group transition-all duration-300"
+                className="relative w-full mx-auto text-center break-words text-base md:text-lg bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-bold py-6 px-4 rounded-lg shadow-xl group transition-all duration-300"
                 onClick={() =>
                   (window.location.href =
                     "https://pay.kirvano.com/1495deef-76af-4a03-a35a-45750c275b9a")
@@ -157,7 +163,7 @@ export default function BonusSection() {
               >
                 <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-shimmer transition-opacity" />
                 <span className="relative flex items-center justify-center gap-2">
-                  GARANTIR MEUS BÔNUS AGORA
+                  QUERO MEUS BÔNUS GRATUITOS AGORA
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
               </Button>

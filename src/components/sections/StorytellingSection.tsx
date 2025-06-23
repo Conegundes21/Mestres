@@ -35,10 +35,18 @@ export default function StorytellingSection() {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-3xl md:text-5xl font-bold mb-12 text-center bg-gradient-to-r from-amber-200 to-yellow-500 bg-clip-text text-transparent leading-tight"
+            className="text-2xl md:text-4xl font-black tracking-tight mb-4 text-center leading-tight"
           >
-            Esse protocolo mental já transformou milhares de vidas. A única pergunta é: você está pronto para sua virada?
+            <span className="text-red-500 drop-shadow-[0_2px_8px_rgba(239,68,68,0.7)]">Você foi programado pra falhar...</span> <span className="bg-gradient-to-r from-amber-200 to-yellow-500 bg-clip-text text-transparent">Mas existe um protocolo mental que reverte <span className='text-red-500 font-black'>TUDO.</span></span>
           </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-base md:text-lg font-medium text-center mb-8 text-white"
+          >
+            Eles criaram um sistema pra manter você confuso, cansado e controlável. Mas existe uma brecha...
+          </motion.p>
 
           {/* VSL Container */}
           <motion.div
@@ -68,10 +76,12 @@ export default function StorytellingSection() {
                 >
                   <Button
                     className="relative w-full max-w-xs mx-auto bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-bold text-lg py-5 rounded-lg shadow-xl group transition-all duration-300"
-                    onClick={() =>
-                      (window.location.href =
-                        "https://pay.kirvano.com/1495deef-76af-4a03-a35a-45750c275b9a")
-                    }
+                    onClick={() => {
+                      const section = document.getElementById('pricing-section');
+                      if (section) {
+                        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                    }}
                   >
                     <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-shimmer transition-opacity" />
                     <span className="relative flex items-center justify-center gap-2 text-xl">
@@ -83,13 +93,6 @@ export default function StorytellingSection() {
                     Finalmente uma solução real para sair da estagnação e crescer de verdade.
                   </p>
                 </motion.div>
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  className="text-2xl md:text-3xl font-bold text-amber-300"
-                >
-                  🔥 Oferta Especial por Tempo Limitado 🔥
-                </motion.p>
               </motion.div>
             </div>
           </motion.div>
@@ -99,49 +102,88 @@ export default function StorytellingSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
-            className="space-y-8 text-lg md:text-xl text-center mb-16"
+            className="max-w-3xl mx-auto mb-16 text-center space-y-7"
           >
-            <p className="text-zinc-300">
-              Imagine acordar todos os dias sabendo que você tem total controle
-              sobre sua vida, seus hábitos e seu futuro...
-            </p>
-            <p className="text-zinc-400">
-              Você já sentiu que está preso em um ciclo de procrastinação,
-              estresse e falta de propósito?
-            </p>
-            <p className="text-amber-200 font-medium">
-              Eu já estive nesse mesmo lugar... até descobrir um método que
-              mudou minha vida para sempre.
-            </p>
-          </motion.div>
-
-          {/* Story */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-            className="space-y-6 text-lg md:text-xl text-zinc-400 mb-12"
-          >
-            <p>
-              Anos atrás, eu estava completamente perdido... Tentava de tudo –
-              cursos, livros, vídeos no YouTube – mas nada realmente mudava
-              minha vida. Era como estar preso em uma roda gigante de frustração
-              e estagnação.
-            </p>
-
-            <p>
-              Até que, após anos de pesquisa e experimentação obsessiva,
-              descobri algo extraordinário: um padrão oculto usado pelos
-              verdadeiros vencedores. Um conjunto de princípios tão poderosos
-              que são capazes de reprogramar completamente sua mente para o
-              sucesso.
-            </p>
-
-            <p className="text-lg md:text-xl text-zinc-300 font-medium">
-              Foi assim que nasceu o Mestres do Desenvolvimento – um método
-              revolucionário que reúne os segredos mais valiosos já descobertos
-              sobre mentalidade, hábitos e sucesso inevitável.
-            </p>
+            <motion.h3
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7 }}
+              className="text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-amber-200 to-yellow-500 bg-clip-text text-transparent mb-4"
+            >
+              Você já sentiu que está vivendo uma vida que não te representa?
+            </motion.h3>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              className="text-lg md:text-xl text-zinc-200 font-medium"
+            >
+              Acorda com a sensação de que está ficando para trás, que tem algo dentro de você pedindo por mais, mas todo dia parece ser só mais do mesmo…
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9 }}
+              className="text-lg md:text-xl text-zinc-400"
+            >
+              E o pior: ninguém ao seu redor parece notar, <span className="block">Pessoas acomodadas, Conversas rasas, Sonhos enterrados pela rotina.</span>
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.0 }}
+              className="text-amber-200 font-extrabold text-2xl md:text-3xl tracking-wide my-6"
+            >
+              Eu também vivi exatamente assim.
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.1 }}
+              className="text-lg md:text-xl text-zinc-200"
+            >
+              Trabalhava duro, Me dedicava, Estudava, Mas parecia que o mundo girava só pra alguns. Eu me sentia sufocado numa realidade onde ninguém falava sobre crescimento, mentalidade ou dinheiro.
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2 }}
+              className="text-lg md:text-xl text-zinc-200"
+            >
+              Era como viver num deserto mental... Sem amigos ambiciosos, Sem referências de verdade. Cercado por pensamentos pequenos, conselhos baratos e um estilo de vida que me fazia pensar: <span className="italic text-zinc-400">“Será que é só isso?”</span>
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.3 }}
+              className="text-lg md:text-xl text-zinc-200"
+            >
+              Foi quando, sem perceber, comecei a observar os que estavam lá no topo: Empresários, milionários, líderes, mentes brilhantes…
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.4 }}
+              className="text-lg md:text-xl text-emerald-300 italic"
+            >
+              E percebi algo que mudou tudo: Eles pensam diferente. Eles falam diferente. Eles vivem com um código que ninguém nos ensinou.
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.5 }}
+              className="text-lg md:text-xl text-zinc-400"
+            >
+              Enquanto a maioria busca por atalhos, eles seguem um caminho invisível, quase secreto.
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.6 }}
+              className="text-lg md:text-xl text-zinc-400"
+            >
+              Descobri padrões mentais, hábitos e princípios que ninguém me ensinou, mas que sempre estiveram ali: <span className="font-semibold text-emerald-200">escondidos entre os códigos de quem realmente vence.</span>
+            </motion.p>
           </motion.div>
 
           {/* Benefits Section */}
@@ -266,10 +308,12 @@ export default function StorytellingSection() {
                 <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-500 rounded-xl blur-md opacity-30 group-hover:opacity-70 transition-all duration-500" />
                 <Button
                   className="relative w-full max-w-xs mx-auto bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-bold text-lg py-5 rounded-lg shadow-xl group transition-all duration-300"
-                  onClick={() =>
-                    (window.location.href =
-                      "https://pay.kirvano.com/1495deef-76af-4a03-a35a-45750c275b9a")
-                  }
+                  onClick={() => {
+                    const section = document.getElementById('pricing-section');
+                    if (section) {
+                      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }}
                 >
                   <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-shimmer transition-opacity" />
                   <span className="relative flex items-center justify-center gap-2 text-xl">

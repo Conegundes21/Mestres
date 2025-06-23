@@ -18,14 +18,14 @@ interface Props {
 const defaultOptions: PricingOption[] = [
   {
     title: "Oferta Especial",
-    price: "6x R$ 9,12",
+    price: "12x R$ 9,94",
     originalPrice: "R$ 297",
     features: [
       "Acesso vitalício ao conteúdo",
       "Garantia de 7 dias",
       "Bônus exclusivos",
       "Suporte por email",
-      "Certificado de conclusão",
+      "Direito A futuras Atualizações Gratuito!",
     ],
     recommended: true,
   },
@@ -97,10 +97,10 @@ export default function PricingSection() {
                     De R$ 297
                   </p>
                   <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-                    6x de R$ 9,12
+                    12x de R$ 9,94
                   </div>
                   <p className="text-emerald-400 font-medium">
-                    ou R$ 49 à vista
+                    ou R$ 97,00 à vista
                   </p>
                 </div>
 
@@ -137,7 +137,7 @@ export default function PricingSection() {
                         <li>✓ Acesso completo ao método</li>
                         <li>✓ Suporte por email</li>
                         <li>✓ Material complementar</li>
-                        <li>✓ Certificado de conclusão</li>
+                        <li>✓ Direito A futuras Atualizações Gratuito!</li>
                       </ul>
                     </div>
                   </div>
