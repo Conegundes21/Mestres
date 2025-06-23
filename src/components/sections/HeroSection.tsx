@@ -25,6 +25,31 @@ const CountdownTimer = () => {
   );
 };
 
+// Countdown persistente de 48h
+function usePersistentCountdown(key = 'hero_countdown', durationMs = 48 * 60 * 60 * 1000) {
+  const [timeLeft, setTimeLeft] = useState(durationMs);
+  useEffect(() => {
+    let end = localStorage.getItem(key);
+    if (!end) {
+      end = (Date.now() + durationMs).toString();
+      localStorage.setItem(key, end);
+    }
+    const endTime = parseInt(end, 10);
+    const update = () => {
+      const now = Date.now();
+      const left = Math.max(0, endTime - now);
+      setTimeLeft(left);
+    };
+    update();
+    const interval = setInterval(update, 1000);
+    return () => clearInterval(interval);
+  }, [key, durationMs]);
+  const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+  const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+  return { hours, minutes, seconds, expired: timeLeft === 0 };
+}
+
 export default function HeroSection() {
   // Popup state
   const [showExitPopup, setShowExitPopup] = useState(false);
@@ -44,6 +69,8 @@ export default function HeroSection() {
   const [lastSocialIndex, setLastSocialIndex] = useState(-1);
   const [lastPeopleCount, setLastPeopleCount] = useState(0);
   const [socialPopupType, setSocialPopupType] = useState<'name' | 'people'>("name");
+
+  const countdown = usePersistentCountdown();
 
   useEffect(() => {
     // Desktop: exit intent
@@ -188,6 +215,16 @@ export default function HeroSection() {
         {/* <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 via-transparent to-transparent" /> */}
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent" />
         <div className="container mx-auto px-4 py-8 md:py-16 flex-1 flex flex-col justify-center items-center relative z-10">
+          {/* Countdown persistente no topo */}
+          <div className="w-full max-w-2xl mx-auto mb-6">
+            <div className="relative w-full h-12 flex items-center justify-center rounded-xl overflow-hidden shadow-lg border border-red-600 bg-gradient-to-r from-red-600 via-red-500 to-red-700">
+              <span className="w-full text-center text-white font-bold text-lg md:text-xl tracking-widest drop-shadow-sm z-10">
+                ⏰ Oferta expira em: {String(countdown.hours).padStart(2, '0')}:{String(countdown.minutes).padStart(2, '0')}:{String(countdown.seconds).padStart(2, '0')}
+              </span>
+              <div className="absolute inset-0 bg-red-700/30 pointer-events-none" />
+              <div className="absolute left-0 top-0 h-full bg-gradient-to-r from-yellow-400/30 to-transparent w-1/3 blur-lg opacity-30" />
+            </div>
+          </div>
           <motion.div
             initial={{ opacity: 0, y: 0 }}
             animate={{ opacity: 1, y: 0 }}
