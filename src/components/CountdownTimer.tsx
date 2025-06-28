@@ -8,7 +8,7 @@ interface CountdownTimerProps {
 }
 
 export default function CountdownTimer({
-  endDate = new Date(Date.now() + 24 * 60 * 60 * 1000), // Default 24 hours from now
+  endDate = new Date(Date.now() + (70 * 60 * 60 * 1000) + (58 * 60 * 1000)), // 70 horas e 58 minutos
   onComplete = () => {},
 }: CountdownTimerProps) {
   const calculateTimeLeft = () => {
@@ -16,7 +16,7 @@ export default function CountdownTimer({
 
     if (difference <= 0) {
       onComplete();
-      return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+      return { expired: true };
     }
 
     return {
@@ -24,6 +24,7 @@ export default function CountdownTimer({
       hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
       minutes: Math.floor((difference / 1000 / 60) % 60),
       seconds: Math.floor((difference / 1000) % 60),
+      expired: false,
     };
   };
 
@@ -37,10 +38,20 @@ export default function CountdownTimer({
     return () => clearInterval(timer);
   }, [endDate]);
 
+  if (timeLeft.expired) {
+    return (
+      <div className="bg-red-900 p-4 rounded-lg shadow-lg text-center">
+        <span className="text-amber-400 text-xl font-bold">Você perdeu Um Bônus Exclusivo e Um desconto Especial</span>
+      </div>
+    );
+  }
+
+  const { expired, ...units } = timeLeft;
+
   return (
     <div className="bg-zinc-900 p-4 rounded-lg shadow-lg">
       <div className="flex justify-center items-center gap-4">
-        {Object.entries(timeLeft).map(([unit, value]) => (
+        {Object.entries(units).map(([unit, value]) => (
           <motion.div
             key={unit}
             initial={{ scale: 0.9, opacity: 0 }}
@@ -48,7 +59,7 @@ export default function CountdownTimer({
             className="flex flex-col items-center"
           >
             <motion.div
-              key={value}
+              key={String(value)}
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               className="bg-gradient-to-b from-amber-500 to-amber-600 text-black font-bold text-2xl w-16 h-16 rounded-lg flex items-center justify-center"

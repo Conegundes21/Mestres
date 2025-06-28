@@ -25,8 +25,8 @@ const CountdownTimer = () => {
   );
 };
 
-// Countdown persistente de 48h
-function usePersistentCountdown(key = 'hero_countdown', durationMs = 48 * 60 * 60 * 1000) {
+// Countdown persistente de 71h58min
+function usePersistentCountdown(key = 'hero_countdown', durationMs = (71 * 60 * 60 * 1000) + (58 * 60 * 1000)) {
   const [timeLeft, setTimeLeft] = useState(durationMs);
   useEffect(() => {
     let end = localStorage.getItem(key);

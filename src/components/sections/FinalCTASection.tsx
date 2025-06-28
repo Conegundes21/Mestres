@@ -45,6 +45,23 @@ export default function FinalCTASection() {
             </span>
           </motion.p>
 
+          {/* Seção Para quem NÃO é */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="bg-zinc-900/80 border border-red-600 rounded-xl p-8 mb-10 text-left max-w-3xl mx-auto"
+          >
+            <h3 className="text-2xl md:text-3xl font-bold text-red-500 mb-4">Este método NÃO é para você se...</h3>
+            <ul className="list-disc pl-6 space-y-2 text-zinc-300">
+              <li>Procura resultados sem esforço ou fórmulas mágicas</li>
+              <li>Não está disposto a mudar hábitos e mentalidade</li>
+              <li>Prefere reclamar a agir</li>
+              <li>Não valoriza investir em si mesmo</li>
+              <li>Busca atalhos e não quer se comprometer com o processo</li>
+            </ul>
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}

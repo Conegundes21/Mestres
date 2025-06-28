@@ -34,8 +34,8 @@ const defaultOptions: PricingOption[] = [
 export default function PricingSection() {
   return (
     <section
-      className="bg-black py-8 md:py-10 flex flex-col relative"
       id="pricing-section"
+      className="bg-black py-8 md:py-10 flex flex-col relative"
       data-apollo-section="pricing"
     >
       <div className="container mx-auto px-4 mb-8">

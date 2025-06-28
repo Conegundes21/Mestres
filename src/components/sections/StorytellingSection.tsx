@@ -15,8 +15,31 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useEffect, useRef, useState } from "react";
 
 export default function StorytellingSection() {
+  const [autoplayMuted, setAutoplayMuted] = useState(false);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    const headline = headlineRef.current;
+    if (!headline) return;
+    let timeout: NodeJS.Timeout;
+    const observer = new window.IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          timeout = setTimeout(() => setAutoplayMuted(true), 1000);
+        }
+      },
+      { threshold: 0.7 }
+    );
+    observer.observe(headline);
+    return () => {
+      observer.disconnect();
+      clearTimeout(timeout);
+    };
+  }, []);
+
   return (
     <section
       id="vsl-section"
@@ -36,6 +59,7 @@ export default function StorytellingSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             className="text-2xl md:text-4xl font-black tracking-tight mb-4 text-center leading-tight"
+            ref={headlineRef}
           >
             <span className="text-red-500 drop-shadow-[0_2px_8px_rgba(239,68,68,0.7)]">Você foi programado pra falhar...</span> <span className="bg-gradient-to-r from-amber-200 to-yellow-500 bg-clip-text text-transparent">Mas existe um protocolo mental que reverte <span className='text-red-500 font-black'>TUDO.</span></span>
           </motion.h2>
@@ -55,7 +79,7 @@ export default function StorytellingSection() {
             transition={{ delay: 0.2 }}
             className="relative mb-8 w-full max-w-4xl mx-auto space-y-8"
           >
-            <VideoPlayer videoId="-gKAkSsfYN8" />
+            <VideoPlayer videoId="ojzf0rPpAzs" autoplayMuted={autoplayMuted} />
 
             <div className="text-center space-y-6">
               <motion.div
