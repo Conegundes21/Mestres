@@ -41,7 +41,7 @@ export default function CountdownTimer({
   if (timeLeft.expired) {
     return (
       <div className="bg-red-900 p-4 rounded-lg shadow-lg text-center">
-        <span className="text-amber-400 text-xl font-bold">Você perdeu Um Bônus Exclusivo e Um desconto Especial</span>
+        <span className="text-amber-400 text-xl font-bold">Que pena! Você acabou de perder um Bônus Especial</span>
       </div>
     );
   }

@@ -83,12 +83,23 @@ function getRecommendation(qualifyAnswers, finalAnswer) {
   return "Seu potencial é enorme. Não deixe para depois: aproveite a oportunidade de evoluir agora!";
 }
 
-export default function QuizTeste() {
+const fadeInScroll = {
+  initial: { opacity: 0, y: 32 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+  exit: { opacity: 0, y: -32, transition: { duration: 0.3, ease: 'easeIn' } }
+};
+
+export default function Quizz() {
   const [current, setCurrent] = useState(0);
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
   const [qualifyAnswers, setQualifyAnswers] = useState([]);
   const [finalAnswer, setFinalAnswer] = useState(null);
+  const [showQuiz, setShowQuiz] = useState(false);
+
+  React.useEffect(() => {
+    setTimeout(() => setShowQuiz(true), 200); // animação de fade-in na abertura
+  }, []);
 
   const handleOption = (idx) => {
     const q = questions[current];
@@ -113,13 +124,15 @@ export default function QuizTeste() {
     <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #0f172a 0%, #134e4a 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}>
       <div style={{ width: '100%', maxWidth: 440, background: '#18181b', borderRadius: 18, boxShadow: '0 0 32px #10b98122', padding: 28, color: '#fff', border: '1px solid #10b98155', position: 'relative' }}>
         <AnimatePresence mode="wait">
-          {!finished ? (
+          {!showQuiz ? (
+            <motion.div key="fadein" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7 }} style={{ minHeight: 200 }} />
+          ) : !finished ? (
             <motion.div
               key={current}
-              initial={{ opacity: 0, scale: 0.92, y: 40 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.92, y: -40 }}
-              transition={{ type: 'spring', stiffness: 180, damping: 18 }}
+              variants={fadeInScroll}
+              initial="initial"
+              animate="animate"
+              exit="exit"
             >
               <div style={{ textAlign: 'center', marginBottom: 18 }}>
                 <div style={{ fontSize: 22, fontWeight: 700, background: 'linear-gradient(90deg,#34d399,#14b8a6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
@@ -129,14 +142,15 @@ export default function QuizTeste() {
                   Este é um teste profissional que vai revelar em qual nível você está e o que está te travando.
                 </div>
               </div>
-              <div style={{ height: 8, width: '100%', background: '#27272a', borderRadius: 8, marginBottom: 18 }}>
-                <motion.div style={{ height: 8, borderRadius: 8, background: 'linear-gradient(90deg,#34d399,#14b8a6)' }} animate={{ width: `${progress}%` }} transition={{ duration: 0.4 }} />
+              <div style={{ height: 8, width: '100%', background: '#27272a', borderRadius: 8, marginBottom: 18, overflow: 'hidden' }}>
+                <motion.div style={{ height: 8, borderRadius: 8, background: 'linear-gradient(90deg,#34d399,#14b8a6)' }} animate={{ width: `${progress}%` }} transition={{ duration: 0.5, ease: 'easeInOut' }} />
               </div>
               <div style={{ color: '#34d399', fontWeight: 600, fontSize: 17, marginBottom: 18, textAlign: 'center' }}>{questions[current].question}</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {questions[current].options.map((opt, idx) => (
                   <motion.button
                     key={idx}
+                    variants={fadeInScroll}
                     whileTap={{ scale: 0.97 }}
                     whileHover={{ scale: 1.04 }}
                     style={{
@@ -205,7 +219,7 @@ export default function QuizTeste() {
                 {getRecommendation(qualifyAnswers, finalAnswer)}
               </div>
               <div style={{ color: '#34d399', fontSize: 15, marginBottom: 18, fontWeight: 500 }}>
-                Aula 100% gratuita e bônus exclusivo garantido ao clicar!
+                Aula 100% gratuita e bônus exclusivo garantido ao assistir a Aula até o final
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 18, alignItems: 'center' }}>
                 <button
