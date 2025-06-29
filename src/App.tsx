@@ -5,6 +5,7 @@ import routes from "tempo-routes";
 import Footer from "./components/Footer";
 import Privacidade from "./pages/Privacidade";
 import Termos from "./pages/Termos";
+import Quizzz from "./pages/Quizzz";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/privacidade" element={<Privacidade />} />
           <Route path="/termos" element={<Termos />} />
+          <Route path="/quizzz" element={<Quizzz />} />
         </Routes>
         {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
         <Footer />
