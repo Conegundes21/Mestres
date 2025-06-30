@@ -5,7 +5,7 @@ import routes from "tempo-routes";
 import Footer from "./components/Footer";
 import Privacidade from "./pages/Privacidade";
 import Termos from "./pages/Termos";
-import Quizz from "./pages/QuizTeste";
+import Quizz from "./pages/Quizz";
 
 function App() {
   return (
