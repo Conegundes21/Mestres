@@ -96,9 +96,13 @@ export default function Quizz() {
   const [qualifyAnswers, setQualifyAnswers] = useState([]);
   const [finalAnswer, setFinalAnswer] = useState(null);
   const [showQuiz, setShowQuiz] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [emailSuccess, setEmailSuccess] = useState(false);
 
   React.useEffect(() => {
-    setTimeout(() => setShowQuiz(true), 200); // animação de fade-in na abertura
+    setTimeout(() => setShowQuiz(true), 200);
   }, []);
 
   const handleOption = (idx) => {
@@ -108,7 +112,7 @@ export default function Quizz() {
     } else if (q.type === "final") {
       setFinalAnswer(idx);
     } else {
-      setScore(score + (idx + 1) * 10 / 5); // Score de 10 a 100
+      setScore(score + (idx + 1) * 10 / 5);
     }
     if (current < questions.length - 1) {
       setCurrent(current + 1);
@@ -119,6 +123,25 @@ export default function Quizz() {
 
   const progress = Math.round(((current) / questions.length) * 100);
   const userScore = Math.round(score * (100 / maxScore));
+
+  function handleEmailSubmit(e) {
+    e.preventDefault();
+    setEmailError("");
+    setEmailSuccess(false);
+    // Validação simples de e-mail
+    if (!email.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)) {
+      setEmailError("Digite um e-mail válido.");
+      return;
+    }
+    // Aqui você pode integrar com backend, Mailchimp, etc.
+    setEmailSuccess(true);
+    setTimeout(() => {
+      setShowPopup(false);
+      setEmail("");
+      setEmailSuccess(false);
+      window.location.href = "/";
+    }, 1200);
+  }
 
   return (
     <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #0f172a 0%, #134e4a 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}>
@@ -236,7 +259,7 @@ export default function Quizz() {
                     cursor: 'pointer',
                     marginBottom: 8,
                   }}
-                  onClick={() => window.location.href = "/"}
+                  onClick={() => setShowPopup(true)}
                 >
                   Acessar aula exclusiva gratuita
                 </button>
@@ -264,6 +287,108 @@ export default function Quizz() {
                   Refazer teste
                 </button>
               </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        {/* POPUP DE EMAIL */}
+        <AnimatePresence>
+          {showPopup && (
+            <motion.div
+              key="popup"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.25 }}
+              style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                width: '100vw',
+                height: '100vh',
+                background: 'rgba(16,24,32,0.85)',
+                zIndex: 50,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <motion.div
+                initial={{ y: 40, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 40, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                style={{
+                  background: '#18181b',
+                  borderRadius: 18,
+                  boxShadow: '0 0 32px #10b98144',
+                  padding: 32,
+                  maxWidth: 380,
+                  width: '90vw',
+                  color: '#fff',
+                  border: '1px solid #10b98155',
+                  textAlign: 'center',
+                  position: 'relative',
+                }}
+              >
+                <button
+                  onClick={() => setShowPopup(false)}
+                  style={{ position: 'absolute', top: 16, right: 16, background: 'none', border: 'none', color: '#a3a3a3', fontSize: 22, cursor: 'pointer' }}
+                  aria-label="Fechar"
+                >×</button>
+                <div style={{ fontSize: 22, fontWeight: 700, marginBottom: 8, background: 'linear-gradient(90deg,#34d399,#14b8a6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                  🔒 Desbloqueie Seu Bônus Exclusivo + Aula Gratuita!
+                </div>
+                <div style={{ color: '#a3a3a3', fontSize: 15, marginBottom: 16 }}>
+                  Assista à aula que revela como alcançar liberdade financeira, uma confiança inabalável e resultados extraordinários e conquiste um bônus exclusivo criado especialmente para o seu perfil.
+                </div>
+                <ul style={{ textAlign: 'left', color: '#34d399', fontSize: 15, margin: '0 0 18px 0', padding: 0, listStyle: 'none' }}>
+                  <li style={{ marginBottom: 4 }}>✔ Acesso imediato à aula</li>
+                  <li style={{ marginBottom: 4 }}>✔ Bônus único para você que chegou até aqui</li>
+                  <li>✔ Estratégias práticas para mudar sua vida hoje</li>
+                </ul>
+                <form onSubmit={handleEmailSubmit} style={{ marginBottom: 10 }}>
+                  <input
+                    type="email"
+                    placeholder="Seu melhor e-mail"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: 12,
+                      borderRadius: 8,
+                      border: '1.5px solid #34d399',
+                      fontSize: 16,
+                      marginBottom: 10,
+                      outline: 'none',
+                      color: '#222',
+                    }}
+                    disabled={emailSuccess}
+                  />
+                  {emailError && <div style={{ color: '#f87171', fontSize: 14, marginBottom: 8 }}>{emailError}</div>}
+                  <button
+                    type="submit"
+                    style={{
+                      width: '100%',
+                      padding: 14,
+                      fontSize: 16,
+                      fontWeight: 700,
+                      background: 'linear-gradient(90deg,#10b981,#14b8a6)',
+                      color: '#fff',
+                      border: 'none',
+                      borderRadius: 8,
+                      boxShadow: '0 2px 8px #10b98122',
+                      cursor: 'pointer',
+                      marginTop: 4,
+                    }}
+                    disabled={emailSuccess}
+                  >
+                    {emailSuccess ? "Enviando..." : "Quero Meu Bônus + Aula Gratuita"}
+                  </button>
+                </form>
+                <div style={{ color: '#a3a3a3', fontSize: 13, marginTop: 8 }}>
+                  Seu e-mail está 100% seguro. Nada de spam.
+                </div>
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
