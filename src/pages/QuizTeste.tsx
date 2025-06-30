@@ -160,7 +160,7 @@ export default function Quizz() {
     fetch('https://sheetdb.io/api/v1/y50x5hxdn5j5d', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ data: [{ email, data: new Date().toLocaleString() }] }),
+      body: JSON.stringify({ data: [{ email, data: new Date().toISOString() }] }),
     })
       .then(response => response.json())
       .then(data => {
