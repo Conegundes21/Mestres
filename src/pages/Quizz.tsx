@@ -177,10 +177,10 @@ export default function Quizz() {
       return;
     }
     setEmailSuccess(true);
-    fetch('https://script.google.com/macros/s/AKfycbzEJDOcUHxaFU1qsoeTA4AaIunlaWYkhjHCssuEx4ZRRLfjKnuWzhfCIClAK5mmIUaq/exec', {
+    fetch('https://sheetdb.io/api/v1/y50x5hxdn5j5d', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({ data: [{ email }] }),
     })
       .then(() => {
         setTimeout(() => {
