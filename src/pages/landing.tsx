@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import HeroSection from "@/components/sections/HeroSection";
 import StorytellingSection from "@/components/sections/StorytellingSection";
 import BenefitsSection from "@/components/sections/BenefitsSection";
@@ -9,10 +10,37 @@ import PricingSection from "@/components/sections/PricingSection";
 import FaqSection from "@/components/sections/FaqSection";
 import FinalCTASection from "@/components/sections/FinalCTASection";
 import PaymentFlow from "@/components/PaymentFlow";
-import { useState } from "react";
 
 export default function LandingPage() {
   const [showPaymentFlow, setShowPaymentFlow] = useState(false);
+
+  useEffect(() => {
+    // Facebook Pixel
+    const script = document.createElement('script');
+    script.innerHTML = `
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '1086131660072186');
+      fbq('track', 'PageView');
+      fbq('track', 'ViewContent');
+    `;
+    document.head.appendChild(script);
+
+    const noscript = document.createElement('noscript');
+    noscript.innerHTML = `<img height='1' width='1' style='display:none' src='https://www.facebook.com/tr?id=1086131660072186&ev=PageView&noscript=1' />`;
+    document.body.appendChild(noscript);
+
+    return () => {
+      document.head.removeChild(script);
+      document.body.removeChild(noscript);
+    };
+  }, []);
 
   const handleOpenPaymentFlow = () => {
     setShowPaymentFlow(true);

@@ -29,6 +29,15 @@ export default function PaymentFlow({
     // Simulate payment processing
     setTimeout(() => {
       setStep("success");
+      // Facebook Pixel Purchase
+      try {
+        if (window.fbq) {
+          window.fbq('track', 'Purchase', {
+            value: 97.00,
+            currency: 'BRL'
+          });
+        }
+      } catch (e) { /* ignore */ }
       setTimeout(() => {
         onSuccess();
         onClose();

@@ -157,10 +157,15 @@ export default function PricingSection() {
                     <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-500 rounded-xl blur-md opacity-70 group-hover:opacity-100 transition-all duration-300" />
                     <Button
                       className="relative w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-bold text-lg py-6 rounded-lg shadow-xl group transition-all duration-300"
-                      onClick={() =>
-                        (window.location.href =
-                          "https://pay.kirvano.com/1495deef-76af-4a03-a35a-45750c275b9a")
-                      }
+                      onClick={() => {
+                        // Facebook Pixel InitiateCheckout
+                        try {
+                          if (window.fbq) {
+                            window.fbq('track', 'InitiateCheckout');
+                          }
+                        } catch (e) { /* ignore */ }
+                        window.location.href = "https://pay.kirvano.com/1495deef-76af-4a03-a35a-45750c275b9a";
+                      }}
                     >
                       <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-shimmer transition-opacity" />
                       <span className="relative flex items-center justify-center gap-2">

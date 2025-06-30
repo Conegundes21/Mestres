@@ -148,6 +148,33 @@ export default function Quizz() {
     }
   }, [finished, startTime]);
 
+  React.useEffect(() => {
+    // Facebook Pixel
+    const script = document.createElement('script');
+    script.innerHTML = `
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '1086131660072186');
+      fbq('track', 'PageView');
+    `;
+    document.head.appendChild(script);
+
+    const noscript = document.createElement('noscript');
+    noscript.innerHTML = `<img height='1' width='1' style='display:none' src='https://www.facebook.com/tr?id=1086131660072186&ev=PageView&noscript=1' />`;
+    document.body.appendChild(noscript);
+
+    return () => {
+      document.head.removeChild(script);
+      document.body.removeChild(noscript);
+    };
+  }, []);
+
   const handleOption = (idx) => {
     const q = questions[current];
     if (q.type === "qualify") {
@@ -161,6 +188,19 @@ export default function Quizz() {
       setCurrent(current + 1);
     } else {
       setFinished(true);
+      // Evento personalizado do Pixel ao finalizar o quiz
+      try {
+        if (window.fbq) {
+          const userScore = Math.round((score + (q.type !== 'final' && q.type !== 'qualify' ? (idx + 1) * 10 / 5 : 0)) * (100 / maxScore));
+          window.fbq('trackCustom', 'QuizCompleted', {
+            score: userScore,
+            level: getLevel(score).label,
+            qualifyAnswers: JSON.stringify([...qualifyAnswers, q.type === 'qualify' ? idx : undefined].filter(v => v !== undefined)),
+            finalAnswer: q.type === 'final' ? idx : finalAnswer,
+            recommendation: getRecommendation([...qualifyAnswers, q.type === 'qualify' ? idx : undefined].filter(v => v !== undefined), q.type === 'final' ? idx : finalAnswer)
+          });
+        }
+      } catch (e) { /* ignore */ }
     }
   };
 
@@ -177,6 +217,16 @@ export default function Quizz() {
       return;
     }
     setEmailSuccess(true);
+    // Evento personalizado do Pixel ao enviar o e-mail
+    try {
+      if (window.fbq) {
+        window.fbq('trackCustom', 'QuizEmailSubmitted', {
+          email,
+          score: Math.round(score * (100 / maxScore)),
+          level: getLevel(score).label
+        });
+      }
+    } catch (e) { /* ignore */ }
     fetch('https://sheetdb.io/api/v1/y50x5hxdn5j5d', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -212,10 +262,10 @@ export default function Quizz() {
             >
               <div style={{ textAlign: 'center', marginBottom: 18 }}>
                 <div style={{ fontSize: 22, fontWeight: 700, background: 'linear-gradient(90deg,#34d399,#14b8a6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                  Em menos de 3 minutos, descubra seu score de mentalidade vencedora!
+                  Descubra Agora o que te impede de CONQUISTAR seus objetivos!
                 </div>
                 <div style={{ color: '#a3a3a3', fontSize: 15, marginTop: 6 }}>
-                  Este é um teste profissional que vai revelar em qual nível você está e o que está te travando.
+                  Em menos de 3 minutos Este teste profissional vai revelar em qual nível você está e o que está te travando.
                 </div>
               </div>
               <div style={{ height: 8, width: '100%', background: '#27272a', borderRadius: 8, marginBottom: 18, overflow: 'hidden' }}>

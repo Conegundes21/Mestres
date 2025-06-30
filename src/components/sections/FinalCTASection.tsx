@@ -71,10 +71,15 @@ export default function FinalCTASection() {
             <Button
               size="lg"
               className="relative w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-bold text-lg py-6 rounded-lg shadow-xl group transition-all duration-300"
-              onClick={() =>
-                (window.location.href =
-                  "https://pay.kirvano.com/1495deef-76af-4a03-a35a-45750c275b9a")
-              }
+              onClick={() => {
+                // Facebook Pixel InitiateCheckout
+                try {
+                  if (window.fbq) {
+                    window.fbq('track', 'InitiateCheckout');
+                  }
+                } catch (e) { /* ignore */ }
+                window.location.href = "https://pay.kirvano.com/1495deef-76af-4a03-a35a-45750c275b9a";
+              }}
             >
               QUERO COMEÇAR AGORA!
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
