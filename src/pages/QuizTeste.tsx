@@ -100,10 +100,31 @@ export default function Quizz() {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [emailSuccess, setEmailSuccess] = useState(false);
+  const [startTime, setStartTime] = useState(null);
 
   React.useEffect(() => {
     setTimeout(() => setShowQuiz(true), 200);
   }, []);
+
+  React.useEffect(() => {
+    if (showQuiz && startTime === null) {
+      setStartTime(Date.now());
+      window.gtag && window.gtag('event', 'quiz_start');
+    }
+  }, [showQuiz, startTime]);
+
+  React.useEffect(() => {
+    if (current > 0 && current < questions.length && showQuiz) {
+      window.gtag && window.gtag('event', 'quiz_step', { step: current + 1 });
+    }
+  }, [current, showQuiz]);
+
+  React.useEffect(() => {
+    if (finished && startTime) {
+      const elapsed = Math.round((Date.now() - startTime) / 1000);
+      window.gtag && window.gtag('event', 'quiz_complete', { elapsed_time: elapsed });
+    }
+  }, [finished, startTime]);
 
   const handleOption = (idx) => {
     const q = questions[current];
@@ -133,14 +154,24 @@ export default function Quizz() {
       setEmailError("Digite um e-mail válido.");
       return;
     }
-    // Aqui você pode integrar com backend, Mailchimp, etc.
     setEmailSuccess(true);
-    setTimeout(() => {
-      setShowPopup(false);
-      setEmail("");
-      setEmailSuccess(false);
-      window.location.href = "/";
-    }, 1200);
+    fetch('https://script.google.com/macros/s/AKfycbzEJDOcUHxaFU1qsoeTA4AaIunlaWYkhjHCssuEx4ZRRLfjKnuWzhfCIClAK5mmIUaq/exec', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    })
+      .then(() => {
+        setTimeout(() => {
+          setShowPopup(false);
+          setEmail("");
+          setEmailSuccess(false);
+          window.location.href = "/";
+        }, 1200);
+      })
+      .catch(() => {
+        setEmailError("Erro ao enviar. Tente novamente.");
+        setEmailSuccess(false);
+      });
   }
 
   return (
