@@ -149,24 +149,32 @@ export default function Quizz() {
     e.preventDefault();
     setEmailError("");
     setEmailSuccess(false);
+
     // Validação simples de e-mail
     if (!email.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)) {
       setEmailError("Digite um e-mail válido.");
       return;
     }
     setEmailSuccess(true);
+
     fetch('https://script.google.com/macros/s/AKfycbzEJDOcUHxaFU1qsoeTA4AaIunlaWYkhjHCssuEx4ZRRLfjKnuWzhfCIClAK5mmIUaq/exec', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email }),
     })
-      .then(() => {
-        setTimeout(() => {
-          setShowPopup(false);
-          setEmail("");
+      .then(response => response.json())
+      .then(data => {
+        if (data.result === 'success') {
+          setTimeout(() => {
+            setShowPopup(false);
+            setEmail("");
+            setEmailSuccess(false);
+            window.location.href = "/";
+          }, 1200);
+        } else {
+          setEmailError("Erro ao enviar. Tente novamente.");
           setEmailSuccess(false);
-          window.location.href = "/";
-        }, 1200);
+        }
       })
       .catch(() => {
         setEmailError("Erro ao enviar. Tente novamente.");
