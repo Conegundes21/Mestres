@@ -115,7 +115,10 @@ export default function Quizz() {
 
   React.useEffect(() => {
     if (current > 0 && current < questions.length && showQuiz) {
-      window.gtag && window.gtag('event', 'quiz_step', { step: current + 1 });
+      window.gtag && window.gtag('event', 'quiz_step', {
+        step: current + 1,
+        question: questions[current].question
+      });
     }
   }, [current, showQuiz]);
 
