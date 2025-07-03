@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import CountdownTimer from '../components/CountdownTimer';
 
 const questions = [
   // Qualificação e conversão
@@ -377,21 +378,25 @@ export default function Quizz() {
                   style={{ position: 'absolute', top: 16, right: 16, background: 'none', border: 'none', color: '#a3a3a3', fontSize: 22, cursor: 'pointer' }}
                   aria-label="Fechar"
                 >×</button>
-                <div style={{ fontSize: 22, fontWeight: 700, marginBottom: 8, background: 'linear-gradient(90deg,#34d399,#14b8a6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                  🔒 Desbloqueie Seu Bônus Exclusivo + Aula Gratuita!
+                <div style={{ fontSize: 22, fontWeight: 700, marginBottom: 8, background: 'linear-gradient(90deg,#fbbf24,#34d399)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  ⚠️ Seu Score: {userScore} / 100 → Nível {getLevel(score).label}
                 </div>
-                <div style={{ color: '#a3a3a3', fontSize: 15, marginBottom: 16 }}>
-                  Assista à aula que revela como alcançar liberdade financeira, uma confiança inabalável e resultados extraordinários e conquiste um bônus exclusivo criado especialmente para o seu perfil.
+                <div style={{ color: '#fff', fontSize: 16, marginBottom: 10, fontWeight: 600 }}>
+                  Você está a 1 passo de desbloquear seu potencial e subir do nível {getLevel(score).label}. Aula + bônus exclusivo só hoje!
                 </div>
-                <ul style={{ textAlign: 'left', color: '#34d399', fontSize: 15, margin: '0 0 18px 0', padding: 0, listStyle: 'none' }}>
-                  <li style={{ marginBottom: 4 }}>✔ Acesso imediato à aula</li>
-                  <li style={{ marginBottom: 4 }}>✔ Bônus único para você que chegou até aqui</li>
-                  <li>✔ Estratégias práticas para mudar sua vida hoje</li>
+                <div style={{ color: '#fbbf24', fontSize: 15, marginBottom: 10, fontWeight: 700 }}>
+                  ⚠️ Atenção: Aula e bônus disponíveis somente HOJE para quem completou o quiz.
+                </div>
+                <CountdownTimer initialMinutes={15} initialSeconds={0} />
+                <ul style={{ textAlign: 'left', color: '#34d399', fontSize: 15, margin: '16px 0 18px 0', padding: 0, listStyle: 'none' }}>
+                  <li style={{ marginBottom: 4 }}>✅ Acesso imediato à aula</li>
+                  <li style={{ marginBottom: 4 }}>✅ Bônus exclusivo para quem fez o quiz</li>
+                  <li>✅ Checklist com 5 passos para desbloquear seu potencial ainda hoje</li>
                 </ul>
                 <form onSubmit={handleEmailSubmit} style={{ marginBottom: 10 }}>
                   <input
                     type="email"
-                    placeholder="Seu melhor e-mail"
+                    placeholder="Digite seu melhor e-mail"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     style={{
@@ -424,7 +429,7 @@ export default function Quizz() {
                     }}
                     disabled={emailSuccess}
                   >
-                    {emailSuccess ? "Enviando..." : "Quero Meu Bônus + Aula Gratuita"}
+                    {emailSuccess ? "Enviando..." : "Sim, quero desbloquear meu potencial AGORA!"}
                   </button>
                 </form>
                 <div style={{ color: '#a3a3a3', fontSize: 13, marginTop: 8 }}>

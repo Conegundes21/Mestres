@@ -5,23 +5,28 @@ import { useState, useEffect } from "react";
 interface CountdownTimerProps {
   endDate?: Date;
   onComplete?: () => void;
+  initialMinutes?: number;
+  initialSeconds?: number;
 }
 
 export default function CountdownTimer({
-  endDate = new Date(Date.now() + (70 * 60 * 60 * 1000) + (58 * 60 * 1000)), // 70 horas e 58 minutos
+  endDate,
   onComplete = () => {},
+  initialMinutes = 0,
+  initialSeconds = 0,
 }: CountdownTimerProps) {
-  const calculateTimeLeft = () => {
-    const difference = endDate.getTime() - Date.now();
+  // Se endDate não for fornecido, usar minutos/segundos iniciais
+  const [targetDate] = React.useState(
+    endDate || new Date(Date.now() + (initialMinutes * 60 + initialSeconds) * 1000)
+  );
 
+  const calculateTimeLeft = () => {
+    const difference = targetDate.getTime() - Date.now();
     if (difference <= 0) {
       onComplete();
       return { expired: true };
     }
-
     return {
-      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-      hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
       minutes: Math.floor((difference / 1000 / 60) % 60),
       seconds: Math.floor((difference / 1000) % 60),
       expired: false,
@@ -34,9 +39,8 @@ export default function CountdownTimer({
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
-
     return () => clearInterval(timer);
-  }, [endDate]);
+  }, [targetDate]);
 
   if (timeLeft.expired) {
     return (
@@ -49,8 +53,8 @@ export default function CountdownTimer({
   const { expired, ...units } = timeLeft;
 
   return (
-    <div className="bg-zinc-900 p-4 rounded-lg shadow-lg">
-      <div className="flex justify-center items-center gap-4">
+    <div className="bg-zinc-900 p-2 rounded-lg shadow-lg mb-2">
+      <div className="flex justify-center items-center gap-2">
         {Object.entries(units).map(([unit, value]) => (
           <motion.div
             key={unit}
@@ -62,11 +66,11 @@ export default function CountdownTimer({
               key={String(value)}
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              className="bg-gradient-to-b from-amber-500 to-amber-600 text-black font-bold text-2xl w-16 h-16 rounded-lg flex items-center justify-center"
+              className="bg-gradient-to-b from-amber-500 to-amber-600 text-black font-bold text-xl w-10 h-10 rounded-lg flex items-center justify-center"
             >
               {String(value).padStart(2, "0")}
             </motion.div>
-            <span className="text-amber-400 text-sm mt-1 capitalize">
+            <span className="text-amber-400 text-xs mt-1 capitalize">
               {unit}
             </span>
           </motion.div>
