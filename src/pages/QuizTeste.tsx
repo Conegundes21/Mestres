@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CountdownTimer from '../components/CountdownTimer';
+import { API_CONFIG } from '../config/api';
 
 const questions = [
   // Qualificação e conversão
@@ -161,7 +162,7 @@ export default function Quizz() {
     }
     setEmailSuccess(true);
 
-    fetch('https://sheetdb.io/api/v1/y50x5hxdn5j5d', {
+    fetch(API_CONFIG.SHEETDB_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ data: [{ email, data: new Date().toISOString() }] }),
