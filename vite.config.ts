@@ -31,8 +31,5 @@ export default defineConfig({
   server: {
     // @ts-ignore
     allowedHosts: true,
-  },
-  define: {
-    'process.env.VITE_SHEETDB_URL': JSON.stringify(process.env.VITE_SHEETDB_URL),
   }
 });

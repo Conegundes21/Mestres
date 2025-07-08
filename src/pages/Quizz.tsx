@@ -229,6 +229,8 @@ export default function Quizz() {
         });
       }
     } catch (e) { /* ignore */ }
+    console.log('Enviando dados para:', API_CONFIG.SHEETDB_URL);
+    
     fetch(API_CONFIG.SHEETDB_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

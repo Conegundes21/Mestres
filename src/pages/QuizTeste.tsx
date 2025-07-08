@@ -162,6 +162,8 @@ export default function Quizz() {
     }
     setEmailSuccess(true);
 
+
+    
     fetch(API_CONFIG.SHEETDB_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
